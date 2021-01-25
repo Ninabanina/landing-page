@@ -64,37 +64,137 @@ section {
 /* ---- Module Rules ---- */
 
 /* Navigation Styles*/
+.navbar__menu {
+    display: none;
+    align-items: center;
+    transition: ease 0.3s all;
+}
+
 .navbar__menu ul {
     padding-left: 0;
-    margin: 0;
+    margin: 0 2.5em;
     text-align: right;
 }
 
 .navbar__menu li {
     display: inline-block;
+    font-size: 1.2em;
 }
 
 .navbar__menu .menu__link {
     display: block;
-    padding: 1em;
+    margin: 0.5em;
+    padding: 0.2em 0;
     font-weight: bold;
     text-decoration: none;
-    color: #000;
+    color: #fff;
+    border-bottom: 1px solid transparent;
 }
 
 .navbar__menu .menu__link:hover {
-    background: #333;
-    color: #fff;
+    color: #b7b6b6;
+    border-bottom: 1px solid #cc1;
     transition: ease 0.3s all;
+}
+
+.navbar__mobile {
+    display: block;
+    position: relative;
+    margin: 0.1em 2em;
+}
+
+#navbar__taggle {
+    position: absolute;
+    right: 0;
+    top: 22px;
+    cursor: pointer;
+    padding: 10px 35px 16px 0px;
+    background: transparent;
+    border: none;
+}
+
+#navbar__taggle:focus {
+    outline-style: none;
+}
+
+#navbar__taggle span,
+#navbar__taggle span:before,
+#navbar__taggle span:after {
+    cursor: pointer;
+    border-radius: 1px;
+    height: 5px;
+    width: 35px;
+    background: white;
+    position: absolute;
+    display: block;
+    content: '';
+    transition: ease 0.3s all;
+}
+
+#navbar__taggle span:before {
+    top: -10px;
+}
+
+#navbar__taggle span:after {
+    bottom: -10px;
+}
+
+#navbar__taggle.active span:before {
+    top: 0;
+    transform: rotate(45deg);
+}
+
+#navbar__taggle.active span {
+    background: transparent;
+}
+
+#navbar__taggle.active span:after {
+    transform: rotate(-45deg);
+    bottom: 0;
+}
+
+.page__header.navbar__mobile--active {
+    flex-direction: column;
+}
+
+.page__header.navbar__mobile--active .navbar__mobile {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.page__header.navbar__mobile--active .navbar__menu {
+    display: flex;
+    justify-content: center;
+}
+
+.page__header.navbar__mobile--active #navbar__list {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 0 0 2em;
 }
 
 /* Header Styles */
 .page__header {
-    background: #fff;
+    background: rgb(0,13,60,1);
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 5;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Oxygen', Sans-Serif;
+}
+
+.page__header a {
+    color: white;
+    text-decoration: none;
+}
+
+.logo {
+    font-size: 2em;
+    padding: 0.5em 1em;
 }
 
 /* Footer Styles */
@@ -192,18 +292,18 @@ section:nth-of-type(3n + 1) .landing__container::after {
 
 /* ---- Theme State Rules ---- */
 /* Section Active Styles */
-/* Note: your-active-class class is applied through javascript. You should update the class here and in the index.html to what you set in your javascript file.  */
-section.your-active-class {
+/* Note: section--active class is applied through javascript. You should update the class here and in the index.html to what you set in your javascript file.  */
+section.section--active {
     background: rgb(0, 0, 0);
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
 }
 
-section.your-active-class .landing__container::before {
+section.section--active .landing__container::before {
     opacity: 1;
     animation: rotate 4s linear 0s infinite forwards;
 }
 
-section.your-active-class .landing__container::after {
+section.section--active .landing__container::after {
     opacity: 1;
     animation: rotate 5s linear 0s infinite forwards reverse;
 }
@@ -220,4 +320,40 @@ section.your-active-class .landing__container::after {
 		           translate(-1em) 
 		           rotate(-360deg);
 	}
+}
+
+/* Responsive */
+
+@media only screen and (min-width: 660px){
+    .navbar__mobile {
+        display: none;
+    }
+
+    .navbar__menu {
+        display: flex;
+    }
+
+    .logo {
+        padding: 0.5em 2.5em;
+    }
+
+    .page__header.navbar__mobile--active {
+        flex-direction: row;
+    }
+    
+    .page__header.navbar__mobile--active .navbar__mobile {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    
+    .page__header.navbar__mobile--active .navbar__menu {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .page__header.navbar__mobile--active #navbar__list {
+        flex-direction: row;
+        margin: 0 2.5em;
+    }
 }
