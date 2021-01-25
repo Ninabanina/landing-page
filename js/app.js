@@ -114,5 +114,3 @@ window.addEventListener('scroll', changeLinkState);
 // init
 
 mobileMenuToggler();
-
-console.log("I am working!")
