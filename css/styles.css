@@ -91,10 +91,15 @@ section {
     border-bottom: 1px solid transparent;
 }
 
-.navbar__menu .menu__link:hover {
+.navbar__menu .menu__link:hover,
+.navbar__menu .menu__link.active {
     color: #b7b6b6;
     border-bottom: 1px solid #cc1;
     transition: ease 0.3s all;
+}
+
+.navbar__menu .menu__link.active {
+    color: #fff;
 }
 
 .navbar__mobile {

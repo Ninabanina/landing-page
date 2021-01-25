@@ -23,7 +23,6 @@ const sections =  document.querySelectorAll("[data-nav]");
 const menu = document.getElementById("navbar__list");
 const mobileMenu =  document.getElementById('navbar__taggle');
 const header = document.querySelector('.page__header');
-const menuLinks = document.querySelectorAll('#navbar__list li a');
 
 /**
  * End Global Variables
@@ -37,8 +36,6 @@ function mobileMenuToggler() {
         header.classList.toggle('navbar__mobile--active');
     })
 }
-
-
 
 /**
  * End Helper Functions
@@ -57,22 +54,41 @@ function buildNav() {
     });
 }
 
-
-
 // Add class 'active' to section when near top of viewport
+
+function changeLinkState() {
+   const menuLinks = document.querySelectorAll('#navbar__list li a');
+   let index = sections.length;
+
+   while(--index && window.scrollY + 400 < sections[index].offsetTop) {}
+  
+   sections.forEach((section) => section.classList.remove('section--active'));
+   menuLinks.forEach((menuLink) => menuLink.classList.remove('active'));
+
+   sections[index].classList.add('section--active');
+   menuLinks[index].classList.add('active');
+}
 
 
 // Scroll to anchor ID using scrollTO event
 
 function scrollTo(el) {
     el.preventDefault();
-    console.log("click me");
     const href = this.getAttribute('href');
     const offsetTop = document.querySelector(href).offsetTop;
+    
     scroll({
         top: offsetTop,
         behavior: "smooth"
     });
+}
+
+function linkHandler() {
+    const menuLinks = document.querySelectorAll('#navbar__list li a');
+
+    menuLinks.forEach( el => {
+        el.addEventListener('click', scrollTo);
+    })  
 }
 
 
@@ -88,11 +104,12 @@ buildNav();
 
 // Scroll to section on link click
 
-menuLinks.forEach( menulink => {
-    menulink.addEventListener('click', scrollTo);
-})
+linkHandler();
 
 // Set sections as active
+
+changeLinkState();
+window.addEventListener('scroll', changeLinkState);
 
 // init
 
