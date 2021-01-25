@@ -69,7 +69,6 @@ function changeLinkState() {
    menuLinks[index].classList.add('active');
 }
 
-
 // Scroll to anchor ID using scrollTO event
 
 function scrollTo(el) {
@@ -90,7 +89,6 @@ function linkHandler() {
         el.addEventListener('click', scrollTo);
     })  
 }
-
 
 /**
  * End Main Functions
